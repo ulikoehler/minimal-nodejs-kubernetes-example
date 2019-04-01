@@ -12,7 +12,23 @@ kubectl create -f kubernetes-deployment.yaml
 kubectl create -f kubernetes-service.yaml
 ```
 
-Now you can find out where your 
+Now you can find out the IP address of the loadbalancer:
+
+```sh
+kubectl describe service/minimal-nodejs-kubernetes-example | grep "IP:" | awk -F' ' '{print $NF}'
+```
+
+This will, for example, output `10.152.183.49`. In case the output is not an IP address, try `kubectl describe service/minimal-nodejs-kubernetes-example` or `kubectl describe minimal-nodejs-kubernetes-example` to find out where the problem originates.
+
+Now we can test if we can access the server using the load balancer running at aforementioned IP address:
+
+```sh
+wget -qO- http://$(kubectl describe service/minimal-nodejs-kubernetes-example | grep "IP:" | awk -F' ' '{print $NF}')/
+```
+which, when successful, will print `{"status":"success"}`.
+That is the response our example server will send if it's running properly.
+Therefore this means out Kubernetes example is up and running.
+
 
 ### How to build docker image
 
