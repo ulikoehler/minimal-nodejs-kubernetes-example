@@ -30,7 +30,7 @@ That is the response our example server will send if it's running properly.
 Therefore this means out Kubernetes example is up and running.
 
 
-### How to build docker image
+### How to build the docker image
 
 The docker image is available pre-build from dockerhub.
 In case you want to do it yourself, here's how I do it:
