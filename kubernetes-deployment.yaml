@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: koatest
+spec:
+  replicas: 2
+  selector:
+    app: koatest
+  template:
+    metadata:
+      name: koatest
+      labels:
+        app: koatest
+    spec:
+      containers:
+      - name: koatest
+        image: ulikoehler/minimal-nodejs-kubernetes-example:v1.0
+        ports:
+        - containerPort: 9093
